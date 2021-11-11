@@ -1,16 +1,57 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "uni-app"
-			}
-		}
-	],
-	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
-	}
+  "pages": [
+    {
+      "path": "pages/hot/hot/hot",
+      "style": {
+        "navigationBarTitleText": "hot"
+      }
+    },
+    {
+      "path": "pages/my/my/my",
+      "style": {
+        "navigationBarTitleText": "my"
+      }
+    },
+    {
+      "path": "pages/video/video/video",
+      "style": {
+        "navigationBarTitleText": "video"
+      }
+    },
+    {
+      "path": "pages/index/index/index",
+      "style": {
+        "navigationBarTitleText": "index"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "selectedColor": "yellow",
+    "list": [
+      {
+        "pagePath": "pages/hot/hot/hot",
+        "text": "热搜",
+        "iconPath": "static/hot-1.png",
+        "selectedIconPath": "static/hot-2.png"
+      },
+      {
+        "pagePath": "pages/video/video/video",
+        "text": "热播",
+        "iconPath": "static/video-1.png",
+        "selectedIconPath": "static/video-2.png"
+      },
+      {
+        "pagePath": "pages/my/my/my",
+        "text": "我的",
+        "iconPath": "static/my-1.png",
+        "selectedIconPath": "static/my-2.png"
+      }
+    ]
+  }
 }

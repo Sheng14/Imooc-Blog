@@ -1,6 +1,6 @@
 <template>
   <div class="my-tabs">
-    <view class="tab-container">
+    <view class="tab-container" style="position: -webkit-sticky; position: sticky; top: 0px; z-index: 99;">
       <view class="tab-box">
         <scroll-view :scroll-left="scrollLeft" id="_scroll" scroll-x class="scroll-view" scroll-with-animation>
           <view class="scroll-content">
@@ -106,6 +106,7 @@ export default {
         defaultIndex: {
           handler(val) {
             this.activeIndex = val;
+            this.tabClick(val); // 让滑块与scroll-view同步
           },
           // 该回调将会在侦听开始之后被立即调用
           immediate: true

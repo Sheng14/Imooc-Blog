@@ -53,5 +53,20 @@
         "selectedIconPath": "static/my-2.png"
       }
     ]
-  }
+  },
+  "subPackages": [
+    {
+      "root": "subpkg",
+      "name": "sub-1",
+      "pages": [
+        {
+          "path": "pages/search-blog/search-blog",
+          "style": {
+            "navigationBarTitleText": "",
+            "enablePullDownRefresh": false
+          }
+        }
+      ]
+    }
+  ]
 }

@@ -6,7 +6,7 @@
         mode="aspectFit"
         class="logo"
       />
-      <view class="search-box">
+      <view class="search-box" @click="onToSearch">
         <!-- 搜索模块 -->
         <my-search placeholderText="uni-app 自定义组件" />
       </view>
@@ -111,7 +111,14 @@ export default {
       this.currentIndex = e.detail.current;
       this.tabClick(this.currentIndex);
     },
-
+    /**
+      搜索框点击事件
+     */
+    onToSearch() {
+      uni.navigateTo({
+        url: '/subpkg/pages/search-blog/search-blog'
+      });
+    },
     /**
      * tab item 的点击事件
      */

@@ -34,6 +34,8 @@
 </template>
 
 <script>
+// 1. 导入 mapState 函数
+import { mapState } from 'vuex';
 import { getDefaultText } from 'api/search';
 // 0: 热搜列表 - 默认
 const HOT_LIST = '0';
@@ -58,9 +60,14 @@ export default {
     // 搜索历史数据
     searchData: []
   }),
-  computed: {},
+  computed: {
+    // 2. 在 computed 中，通过 mapState 函数，注册 state 中的数据，导入之后的数据可直接使用（就像使用 data 中的数据一样）
+    // mapState(模块名, ['字段名','字段名','字段名'])
+    ...mapState('search', ['msg'])
+  },
   created() {
     this.loadDefaultText();
+    console.log(this.msg);
   },
   methods: {
     /**

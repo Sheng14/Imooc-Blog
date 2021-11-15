@@ -1,0 +1,82 @@
+<template>
+  <div class="search-result-item-theme-1">
+    <view class="search-result-item-box">
+      <!-- 标题 -->
+      <rich-text :nodes="data.title" class="item-title line-clamp-2"></rich-text>
+      <!-- 内容区 - 样式 1 -->
+      <rich-text :nodes="data.description" class="item-desc line-clamp-2"></rich-text>
+      <!-- 底部 -->
+      <view class="item-desc-bottom">
+        <view class="item-author">{{ data.author }}</view>
+        <view class="item-read-num">
+          <uni-icons class="read-num-icon" color="#999999" type="compose" />
+          <text>{{ data.updateTime | relativeTime }}</text>
+        </view>
+      </view>
+    </view>
+  </div>
+</template>
+
+<script>
+
+export default {
+  props: {
+    data: {
+      type: Object,
+      required: true
+    }
+  },
+  data: () => ({}),
+  computed: {},
+  methods: {},
+  watch: {},
+
+  // 组件周期函数--监听组件挂载完毕
+  mounted() {},
+  // 组件周期函数--监听组件数据更新之前
+  beforeUpdate() {},
+  // 组件周期函数--监听组件数据更新之后
+  updated() {},
+  // 组件周期函数--监听组件激活(显示)
+  activated() {},
+  // 组件周期函数--监听组件停用(隐藏)
+  deactivated() {},
+  // 组件周期函数--监听组件销毁之前
+  beforeDestroy() {},
+};
+</script>
+
+<style lang="scss" scoped>
+.search-result-item-box {
+  margin-bottom: $uni-spacing-col-big;
+  // 标题
+  .item-title {
+    font-size: $uni-font-size-base;
+    font-weight: bold;
+    color: $uni-text-color-title;
+  }
+
+  .item-desc {
+    margin-top: $uni-spacing-col-base;
+    font-size: $uni-font-size-base;
+    color: $uni-color-subtitle;
+  }
+
+  // 底部作者 + 阅读量
+  .item-desc-bottom {
+    margin-top: $uni-spacing-col-base;
+    display: flex;
+    color: $uni-text-color-grey;
+    font-size: $uni-font-size-sm;
+    .item-author {
+      margin-right: $uni-spacing-row-lg;
+    }
+    .item-read-num {
+      .read-num-icon {
+        color: $uni-text-color-grey;
+        margin-right: $uni-spacing-row-sm;
+      }
+    }
+  }
+}
+</style>

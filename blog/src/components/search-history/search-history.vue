@@ -26,20 +26,26 @@
 </template>
 
 <script>
-
+// 1. 导入 mapState 函数
+import { mapState, mapMutations } from 'vuex';
 export default {
   name: 'search-history',
   props: {
-    searchData: {
+   /* searchData: {
       type: Array,
       required: true
-    }
+    }*/
   },
   data: () => ({
     isShowClear: false
   }),
-  computed: {},
+  computed: {
+    // 2. 在 computed 中，通过 mapState 函数，注册 state 中的数据，导入之后的数据可直接使用（就像使用 data 中的数据一样）
+    // mapState(模块名, ['字段名','字段名','字段名'])
+    ...mapState('search', ['searchData'])
+  },
   methods: {
+    ...mapMutations('search', ['removeSearchData', 'removeAllSearchData']),
     onClearAll() {
       uni.showModal({
         title: '提示',
@@ -48,7 +54,8 @@ export default {
         success: ({ confirm, cancel }) => {
           if (confirm) {
             // 删除 searchData
-            this.$emit('removeAllSearchData');
+            // this.$emit('removeAllSearchData');
+            this.removeAllSearchData();
             // 返回状态
             this.isShowClear = false;
           }

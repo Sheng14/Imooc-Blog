@@ -1,7 +1,7 @@
 <template>
-  <div class="my-search">
+  <view class="my-search-container">
     <!-- 搜索输入框 -->
-    <uni-search-bar
+    <input type="text"
       v-if="isShowInput"
       class="my-search-bar"
       :radius="100"
@@ -15,22 +15,26 @@
       :placeholder="placeholderText"
       :value="value"
     >
-      <uni-icons slot="clearIcon" type="clear" color="#999999" />
-    </uni-search-bar>    
-      <view class="my-search-container">
-        <!-- 搜索按钮 -->
-        <view class="my-search-box">
-          <image class="icon" src="@/static/search.png" />
-          <text
-            class="placeholder"
-            :style="{
-              color: config.textColor
-            }"
-            >{{ placeholderText }}</text
-          >
-        </view>
+    <!-- 搜索按钮 -->
+    <view
+      class="my-search-box"
+      v-else
+      :style="{
+        height: 36+ 'px',
+        backgroundColor: '#ffffff',
+        border: '1px solid #c9c9c9'
+      }"
+    >
+      <image class="icon" src="/static/search.png" />
+      <text
+        class="placeholder"
+        :style="{
+          color: '#454545'
+        }"
+        >{{ placeholderText }}</text
+      >
     </view>
-  </div>
+  </view>
 </template>
 
 <script>
@@ -106,7 +110,7 @@ export default {
       // 时，在组件外可以使用 v-model 完成双向数据绑定。
       // 即：用户输入内容时，父组件传递过来的 value 同步发生变化
       // 详细见 vue 中 v-model 指令：https://cn.vuejs.org/v2/guide/components-custom-events.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%E7%9A%84-v-model
-      this.$emit('input', val);
+      this.$emit('input', val.detail.value); // 这里由于不是使用官方组件所以不能直接写val，需要自己拆出来val值
     }    
   }),
   computed: {},
@@ -144,10 +148,12 @@ export default {
     display: flex;
     align-items: center;
     padding: 0 $uni-spacing-row-base;
+
     .icon {
       width: $uni-img-size-sm;
       height: $uni-img-size-sm;
     }
+
     .placeholder {
       font-size: $uni-font-size-sm;
       margin-left: $uni-spacing-row-sm;

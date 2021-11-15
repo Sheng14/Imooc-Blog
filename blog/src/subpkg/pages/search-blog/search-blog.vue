@@ -28,14 +28,14 @@
     </view>
     <!-- 搜索结果 -->
     <view class="search-result-box" v-else>
-      <search-result-list />
+      <search-result-list :queryStr="searchVal" />
     </view>
   </view>
 </template>
 
 <script>
 // 1. 导入 mapState 函数
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import { getDefaultText } from 'api/search';
 // 0: 热搜列表 - 默认
 const HOT_LIST = '0';
@@ -70,6 +70,7 @@ export default {
     console.log(this.msg);
   },
   methods: {
+    ...mapMutations('search', ['addSearchData']),
     /**
      * 搜索内容
      */
@@ -77,14 +78,16 @@ export default {
       // 用户未输入文本，直接搜索时，使用【推荐搜索文本】
       this.searchVal = val ? val : this.defaultText;
       // 保存搜索历史数据
-      this.saveSearchData();
+      // this.saveSearchData();
+      this.addSearchData(this.searchVal);
       if (this.searchVal) {
         this.showType = SEARCH_RESULT;
       }
+      console.log(this.searchVal)
     },
     /**
      * 保存搜索历史数据
-     */
+     
     saveSearchData() {
       // 1. 如果数据已存在，则删除
       const index = this.searchData.findIndex((item) => item === this.searchVal);
@@ -93,16 +96,16 @@ export default {
       }
       // 2. 新的搜索内容需要先于旧的搜索内容展示
       this.searchData.unshift(this.searchVal);
-    },
+    },*/
     /**
      * 删除数据
-     */
+     
     onRemoveSearchData(index) {
       this.searchData.splice(index, 1);
     },
     onRemoveAllSearchData() {
       this.searchData = [];
-    },    
+    },    */
     // searchbar 获取焦点
     onSearchFocus(val) {
       this.showType = SEARCH_HISTORY;
@@ -112,6 +115,7 @@ export default {
      */
     onSearchBlur(val) {
       console.log('searchbar 失去焦点');
+     // this.showType = HOT_LIST;
     },
     /**
      * searchbar 清空内容
@@ -131,6 +135,7 @@ export default {
     async loadDefaultText() {
       const { data: res } = await getDefaultText();
       this.defaultText = res.defaultText;
+      console.log(this.searchVal)
     }
   },
   watch: {},

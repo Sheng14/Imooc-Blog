@@ -17,3 +17,13 @@ export function getDefaultText() {
     url: '/search/hot-list'
   });
 }
+
+/**
+ * 搜索结果
+ */
+ export function getSearchResult(data) {
+  return request({
+    url: '/search',
+    data
+  });
+}

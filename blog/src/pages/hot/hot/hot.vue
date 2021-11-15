@@ -30,6 +30,7 @@
               :data="item"
               :ranking="index + 1"
               class="listItem"
+              @click="onItemClick(item)"
             ></hot-list-item>
           </block>
         </view>
@@ -126,7 +127,13 @@ export default {
       this.currentIndex = index;
       // 获取列表数据
       this.getHotListFromTab();
-    }    
+    },
+    // 进入文章详情
+    onItemClick(item) {
+      uni.navigateTo({
+        url: `/subpkg/pages/blog-detail/blog-detail?author=${item.user_name}&articleId=${item.id}`
+      });
+    }
   },
   watch: {},
     /*获取滚动列表需要的高度（缺陷在于每个item的高度不一致，加起来可能没那么合适） 

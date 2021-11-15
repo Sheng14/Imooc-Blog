@@ -5,7 +5,7 @@
       <view v-else>
         <!-- 循环渲染列表数据 -->
         <block v-for="(item, index) in resultList" :key="index">
-          <view class="search-result-item-box">
+          <view class="search-result-item-box" @click="onItemClick(item)">
             <!-- 内容区 - 样式 1 -->
             <search-result-item-theme-1
               v-if="!item.pic_list || item.pic_list.length === 0"
@@ -71,6 +71,14 @@ export default {
         this.isEmpty = true;
       };
       console.log(this.resultList);
+    },
+    /**
+     * item 点击事件
+     */
+    onItemClick(item) {
+      uni.navigateTo({
+        url: `/subpkg/pages/blog-detail/blog-detail?author=${item.author}&articleId=${item.id}`
+      });
     }
   },
   watch: {},

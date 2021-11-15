@@ -20,7 +20,11 @@ function request({ url, data, method }) {
       },
       fail: (error) => {
         reject(error);
-      }
+      }/*,
+      complete: () => {
+        // 关闭加载
+        uni.hideLoading();
+      } 这个我当然可以在success和fail中开启加载，然后在这里关闭加载中的提示，但是由于tab切换延迟的问题就暂时不在这写了*/
     });
   });
 }

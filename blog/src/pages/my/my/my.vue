@@ -1,10 +1,13 @@
 <template>
-  <div class="my">my</div>
+  <div class="my">
+    <my-login/>
+  </div>
 </template>
 
 <script>
 
 export default {
+  name: 'login',
   components: {},
   data: () => ({}),
   computed: {},
@@ -34,4 +37,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+
+</style>

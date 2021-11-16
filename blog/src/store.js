@@ -4,13 +4,16 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 // 导入 search.js 暴露的对象
 import search from './modules/search';
+// 导入user.js暴露的对象
+import user from './modules/user';
 
 // 2. 安装 Vuex 插件
 Vue.use(Vuex);
 // 3. 创建 store 实例
 const store = new Vuex.Store({
     modules: {
-        search
+        search,
+        user
     }
 });
 export default store;

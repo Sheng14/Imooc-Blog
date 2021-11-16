@@ -14,6 +14,7 @@
       :bgColor="config.backgroundColor"
       :placeholder="placeholderText"
       :value="value"
+      style="height: 30px;"
     >
     <!-- 搜索按钮 -->
     <view

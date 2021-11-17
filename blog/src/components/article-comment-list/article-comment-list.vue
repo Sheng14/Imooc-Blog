@@ -80,7 +80,13 @@ export default {
       } else {
         this.isShowMore = false;
       }
-    }
+    },
+    /**
+     * 为 comment 增加一个评论
+     */
+    addCommentList(data) {
+      this.commentList.unshift(data);
+    }    
   },
   watch: {},
   created() {

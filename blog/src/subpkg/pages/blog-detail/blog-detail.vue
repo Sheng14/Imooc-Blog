@@ -20,18 +20,26 @@
             </view>
             <view class="detail-right">
               <!-- 关注按钮 -->
-              <button class="follow" size="mini">关注</button>
+              <button
+                    class="follow"
+                    size="mini"
+                    :type="articleData.isFollow ? 'primary' : 'default'"
+                    :loading="isFollowLoading"
+                    @click="onFollowClick"
+                    >
+                {{ articleData.isFollow ? '已关注' : '关注' }}
+              </button>
             </view>
           </view>
           <!-- 文章内容 <rich-text :nodes="articleData.content"></rich-text> -->        
           <mp-html class="markdown_views" :content="addClassFromHTML(articleData.content)" scroll-table />
           <!-- 评论列表 -->
           <view class="comment-box">
-            <article-comment-list :articleId="articleId" />
+            <article-comment-list :articleId="articleId" ref="comment"/>
           </view>
         </block>
         <!-- 底部功能区 -->
-        <article-operate />
+        <article-operate @commitClick="onCommit" :articleId="articleId" @success="onSendSuccess"/>
       </view>
     </page-meta> 
 </template>
@@ -40,6 +48,8 @@
 // 导入解析富文本组件
 import mpHtml from 'mp-html/dist/uni-app/components/mp-html/mp-html';
 import { getArticleDetail } from 'api/article';
+import { mapActions } from 'vuex';
+import { userFollow } from 'api/user';
 export default {
   components: {
     mpHtml
@@ -50,10 +60,13 @@ export default {
     // 文章 ID
     articleId: '',
     // 文章详情数据
-    articleData: null
+    articleData: null,
+    // 关注用户的 loading
+    isFollowLoading: false
   }),
   computed: {},
   methods: {
+    ...mapActions('user', ['isLogin']),
     /**
      * 为所有的 DOM 增加类名
      */
@@ -103,7 +116,42 @@ export default {
       this.articleData = res.data;
       console.log(this.articleData);
       uni.hideLoading();
-    }
+    },
+    /**
+     *  关注按钮点击事件
+     */
+    async onFollowClick() {
+      // 进行登录判定
+      const isLogin = await this.isLogin();
+      if (!isLogin) {
+        return;
+      }
+      // 关注用户
+      // 开启 button 的 loading
+      this.isFollowLoading = true;
+      const { data: res } = await userFollow({
+        author: this.author,
+        isFollow: !this.articleData.isFollow
+      });
+      // 修改用户数据
+      this.articleData.isFollow = !this.articleData.isFollow;
+      // 关闭 button 的 loading
+      this.isFollowLoading = false;
+      console.log(this.articleData);
+    },
+    /**
+     * 发布评论点击事件
+     */
+    onCommit() {
+      console.log('进行评论');
+    },
+    /**
+     * 发表评论成功
+     */
+    onSendSuccess(data) {
+      // 调用子组件修改数组的方法，显示评论数据,添加到评论列表中
+      this.$refs.comment.addCommentList(data);
+    }     
   },
   watch: {},
 

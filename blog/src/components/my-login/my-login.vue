@@ -36,11 +36,14 @@ export default {
       uni.showLoading({
         title: '加载中'
       });
+      // 获取用户信息，调用 login 接口
       uni.getUserProfile({
         desc: '登录后可同步数据',
         success: async (obj) => {
           // 调用 action ，请求登录接口
           await this.login(obj);
+          // 登录成功之后，发送事件
+          this.$emit('onLoginSuccess');
         },
         fail: () => {
           uni.showToast({

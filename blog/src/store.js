@@ -6,6 +6,8 @@ import Vuex from 'vuex';
 import search from './modules/search';
 // 导入user.js暴露的对象
 import user from './modules/user';
+// 导入video.js暴露的对象
+import video from './modules/video';
 
 // 2. 安装 Vuex 插件
 Vue.use(Vuex);
@@ -13,7 +15,8 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     modules: {
         search,
-        user
+        user,
+        video
     }
 });
 export default store;

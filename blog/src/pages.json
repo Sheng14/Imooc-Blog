@@ -79,6 +79,13 @@
             "navigationBarTitleText": "",
             "enablePullDownRefresh": false
           }
+        },
+        {
+          "path": "pages/video-detail/video-detail",
+          "style": {
+            "navigationBarTitleText": "",
+            "enablePullDownRefresh": false
+          }
         }
       ]
     }

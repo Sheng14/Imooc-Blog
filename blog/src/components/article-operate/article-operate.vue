@@ -31,6 +31,9 @@ export default {
     articleId: {
       type: String,
       required: true
+    },
+    tag: {
+      type: String
     }
   },
   data: () => ({}),
@@ -54,23 +57,27 @@ export default {
      * 发送按钮点击事件
      */
     async onBtnClick() {
-      if (inputVal === '') return;
-      // 展示加载框
-      uni.showLoading({
-        title: '加载中'
-      });
-      // 异步处理即可
-      const { data: res } = await userArticleComment({
-        articleId: this.articleId,
-        content: inputVal
-      });
-      uni.showToast({
-        title: '发表成功',
-        icon: 'success',
-        mask: true
-      });
-      // 发表成功之后的回调
-      this.$emit('success', res);
+      if (this.tag === 'video') { // 处理弹幕
+        this.$emit('danmuClick', inputVal);
+      } else { // 处理评论
+        if (inputVal === '') return;
+        // 展示加载框
+        uni.showLoading({
+          title: '加载中'
+        });
+        // 异步处理即可
+        const { data: res } = await userArticleComment({
+          articleId: this.articleId,
+          content: inputVal
+        });
+        uni.showToast({
+          title: '发表成功',
+          icon: 'success',
+          mask: true
+        });
+        // 发表成功之后的回调
+        this.$emit('success', res);
+      }
     }    
   },
   watch: {},

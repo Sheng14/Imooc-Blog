@@ -9,3 +9,13 @@ export function getHotVideoList(data) {
     data
   });
 }
+
+/**
+ * 获取视频弹幕列表
+ */
+ export function getVideoDanmuList(data) {
+  return request({
+    url: '/video/danmu',
+    data
+  });
+}

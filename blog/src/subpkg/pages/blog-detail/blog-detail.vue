@@ -1,5 +1,7 @@
 <template>
+    <!-- #ifndef H5 -->
     <page-meta root-font-size="52px">
+    <!-- #endif -->
       <view class="detail-container">
         <!-- 文章内容区域 -->
         <block v-if="articleData">
@@ -41,7 +43,9 @@
         <!-- 底部功能区 -->
         <article-operate @commitClick="onCommit" :articleId="articleId" @success="onSendSuccess"/>
       </view>
+    <!-- #ifndef H5 -->
     </page-meta> 
+    <!-- #endif -->
 </template>
 
 <script>

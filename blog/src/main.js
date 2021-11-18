@@ -3,6 +3,8 @@ import App from './App'
 // 导入 vuex 实例
 import store from './store';
 import * as filters from './filters';
+// 文章详情样式
+import './styles/article-detail.scss';
 
 // 注册过滤器
 Object.keys(filters).forEach((key) => {
